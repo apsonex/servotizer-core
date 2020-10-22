@@ -1,0 +1,64 @@
+{
+  "name": "apsonex/servotizer-core",
+  "description": "The kernel and invocation handlers for Laravel Servotizer",
+  "keywords": [
+    "servotizer"
+  ],
+  "homepage": "https://github.com/apsonex/servotizer-core",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Gurinder Chauhan",
+      "email": "gurinder@apsonex.com"
+    }
+  ],
+  "require": {
+    "php": "^7.4",
+    "aws/aws-sdk-php": "^3.80",
+    "guzzlehttp/guzzle": "^6.3|^7.0",
+    "hollodotme/fast-cgi-client": "^3.0",
+    "illuminate/container": "^6.0|^7.0|^8.0",
+    "illuminate/http": "^6.0|^7.0|^8.0",
+    "illuminate/queue": "^6.0|^7.0|^8.0",
+    "illuminate/support": "^6.0|^7.0|^8.0",
+    "monolog/monolog": "^1.12|^2.0",
+    "riverline/multipart-parser": "^2.0",
+    "symfony/process": "^4.3|^5.0",
+    "nyholm/psr7": "^1.0",
+    "symfony/psr-http-message-bridge": "^1.0|^2.0"
+  },
+  "require-dev": {
+    "mockery/mockery": "^1.2",
+    "orchestra/testbench": "^4.0|^5.0|^6.0",
+    "phpunit/phpunit": "^8.0",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Apsonex\\ServotizerCore\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Apsonex\\ServotizerCore\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "2.0-dev"
+    },
+    "laravel": {
+      "providers": [
+        "Apsonex\\ServotizerCore\\ServotizerServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
