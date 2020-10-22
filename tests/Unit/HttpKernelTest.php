@@ -34,13 +34,13 @@ class HttpKernelTest extends TestCase
     public function test_should_send_maintenance_mode_response_when_enabled_and_on_non_vanity_domain()
     {
         $_ENV['APP_VANITY_URL'] = 'https://something.com';
-        $_ENV['VAPOR_MAINTENANCE_MODE'] = 'true';
+        $_ENV['SERVOTIZER_MAINTENANCE_MODE'] = 'true';
 
         $this->assertTrue(HttpKernel::shouldSendMaintenanceModeResponse(Request::create('/', 'GET')));
         $this->assertFalse(HttpKernel::shouldSendMaintenanceModeResponse(Request::create('http://something.com', 'GET')));
 
         unset($_ENV['APP_VANITY_URL']);
-        unset($_ENV['VAPOR_MAINTENANCE_MODE']);
+        unset($_ENV['SERVOTIZER_MAINTENANCE_MODE']);
 
         $this->assertFalse(HttpKernel::shouldSendMaintenanceModeResponse(Request::create('/', 'GET')));
         $this->assertFalse(HttpKernel::shouldSendMaintenanceModeResponse(Request::create('http://something.com', 'GET')));

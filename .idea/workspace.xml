@@ -21,13 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e73f181d-9bc1-4263-8e19-9eb9e39767bf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Runtime/CliHandlerFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Runtime/CliHandlerFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ServotizerServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServotizerServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stubs/cliRuntime.php" beforeDir="false" afterPath="$PROJECT_DIR$/stubs/cliRuntime.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stubs/fpmRuntime.php" beforeDir="false" afterPath="$PROJECT_DIR$/stubs/fpmRuntime.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stubs/httpHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/stubs/httpHandler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stubs/httpRuntime.php" beforeDir="false" afterPath="$PROJECT_DIR$/stubs/httpRuntime.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Unit/HttpKernelTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/HttpKernelTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +167,7 @@
       <option name="presentableId" value="Default" />
       <updated>1603377729540</updated>
       <workItem from="1603377730628" duration="2799000" />
-      <workItem from="1603399051669" duration="1425000" />
+      <workItem from="1603399051669" duration="1926000" />
     </task>
     <servers />
   </component>
