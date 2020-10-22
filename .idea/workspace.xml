@@ -20,8 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e73f181d-9bc1-4263-8e19-9eb9e39767bf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Runtime/CliHandlerFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Runtime/CliHandlerFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ServotizerServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServotizerServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/cliRuntime.php" beforeDir="false" afterPath="$PROJECT_DIR$/stubs/cliRuntime.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/fpmRuntime.php" beforeDir="false" afterPath="$PROJECT_DIR$/stubs/fpmRuntime.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/httpHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/stubs/httpHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stubs/httpRuntime.php" beforeDir="false" afterPath="$PROJECT_DIR$/stubs/httpRuntime.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +173,7 @@
       <option name="presentableId" value="Default" />
       <updated>1603377729540</updated>
       <workItem from="1603377730628" duration="2799000" />
-      <workItem from="1603399051669" duration="223000" />
+      <workItem from="1603399051669" duration="1425000" />
     </task>
     <servers />
   </component>
@@ -191,13 +197,13 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="135" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1440.900@0.0.1440.900" timestamp="1603380134601" />
-    <state x="428" y="184" width="584" height="532" key="find.popup" timestamp="1603381164586">
+    <state x="428" y="184" width="584" height="532" key="find.popup" timestamp="1603403325845">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="428" y="184" width="584" height="532" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1603381164586" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1603384846672">
+    <state x="428" y="184" width="584" height="532" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1603403325845" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1603403317140">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1603384846672" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1603403317140" />
   </component>
 </project>

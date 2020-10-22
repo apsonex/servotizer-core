@@ -1,11 +1,16 @@
 <?php
 
+use Apsonex\ServotizerCore\Runtime\CliHandlerFactory;
+use Apsonex\ServotizerCore\Runtime\LambdaContainer;
+use Apsonex\ServotizerCore\Runtime\LambdaRuntime;
+use Apsonex\ServotizerCore\Runtime\StorageDirectories;
 use Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
-use Laravel\Vapor\Runtime\CliHandlerFactory;
-use Laravel\Vapor\Runtime\LambdaContainer;
-use Laravel\Vapor\Runtime\LambdaRuntime;
-use Laravel\Vapor\Runtime\Secrets;
-use Laravel\Vapor\Runtime\StorageDirectories;
+
+//use Laravel\Vapor\Runtime\CliHandlerFactory;
+//use Laravel\Vapor\Runtime\LambdaContainer;
+//use Laravel\Vapor\Runtime\LambdaRuntime;
+//use Laravel\Vapor\Runtime\Secrets;
+//use Laravel\Vapor\Runtime\StorageDirectories;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +26,7 @@ use Laravel\Vapor\Runtime\StorageDirectories;
 Secrets::addToEnvironment(
     $_ENV['SERVOTIZER_SSM_PATH'],
     json_decode($_ENV['SERVOTIZER_SSM_VARIABLES'] ?? '[]', true),
-    __DIR__.'/vaporSecrets.php'
+    __DIR__ . '/vaporSecrets.php'
 );
 
 /*
@@ -35,17 +40,17 @@ Secrets::addToEnvironment(
 |
 */
 
-with(require __DIR__.'/bootstrap/app.php', function ($app) {
+with(require __DIR__ . '/bootstrap/app.php', function ($app) {
     StorageDirectories::create();
 
     $app->useStoragePath(StorageDirectories::PATH);
 
-    echo 'Caching Laravel configuration'.PHP_EOL;
+    echo 'Caching Laravel configuration' . PHP_EOL;
 
     try {
         $app->make(ConsoleKernelContract::class)->call('config:cache');
     } catch (Throwable $e) {
-        echo 'Failing caching Laravel configuration: '.$e->getMessage().PHP_EOL;
+        echo 'Failing caching Laravel configuration: ' . $e->getMessage() . PHP_EOL;
     }
 });
 
@@ -66,12 +71,10 @@ $lambdaRuntime = LambdaRuntime::fromEnvironmentVariable();
 
 while (true) {
     $lambdaRuntime->nextInvocation(function ($invocationId, $event) {
-        return CliHandlerFactory::make($event)
-                        ->handle($event)
-                        ->toApiGatewayFormat();
+        return CliHandlerFactory::make($event)->handle($event)->toApiGatewayFormat();
     });
 
     LambdaContainer::terminateIfInvocationLimitHasBeenReached(
-        ++$invocations, (int) ($_ENV['SERVOTIZER_MAX_REQUESTS'] ?? 250)
+        ++$invocations, (int)($_ENV['SERVOTIZER_MAX_REQUESTS'] ?? 250)
     );
 }

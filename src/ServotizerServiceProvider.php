@@ -27,9 +27,9 @@ class ServotizerServiceProvider extends ServiceProvider
     {
         $this->ensureRoutesAreDefined();
 
-        //        if (($_ENV['VAPOR_SERVERLESS_DB'] ?? null) === 'true') {
-        //            Schema::defaultStringLength(191);
-        //        }
+        if (($_ENV['SERVOTIZER_SERVERLESS_DB'] ?? null) === 'true') {
+            Schema::defaultStringLength(191);
+        }
 
         if ($this->app->resolved('queue')) {
             call_user_func($this->queueExtender());
@@ -47,11 +47,13 @@ class ServotizerServiceProvider extends ServiceProvider
      */
     protected function queueExtender()
     {
-        return function () {
-            Queue::extend('sqs', function () {
-                return new ServotizerConnector;
-            });
-        };
+        return fn() => Queue::extend('sqs', fn() => new ServotizerConnector);
+
+        //        return function () {
+        //            Queue::extend('sqs', function () {
+        //                return new ServotizerConnector;
+        //            });
+        //        };
     }
 
     /**

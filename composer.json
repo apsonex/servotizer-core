@@ -25,7 +25,8 @@
     "riverline/multipart-parser": "^2.0",
     "symfony/process": "^4.3|^5.0",
     "nyholm/psr7": "^1.0",
-    "symfony/psr-http-message-bridge": "^1.0|^2.0"
+    "symfony/psr-http-message-bridge": "^1.0|^2.0",
+    "ext-json": "*"
   },
   "require-dev": {
     "mockery/mockery": "^1.2",

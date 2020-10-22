@@ -1,12 +1,19 @@
 <?php
 
+use Apsonex\ServotizerCore\Runtime\Fpm\Fpm;
+use Apsonex\ServotizerCore\Runtime\HttpHandlerFactory;
+use Apsonex\ServotizerCore\Runtime\LambdaContainer;
+use Apsonex\ServotizerCore\Runtime\LambdaRuntime;
+use Apsonex\ServotizerCore\Runtime\Secrets;
+use Apsonex\ServotizerCore\Runtime\StorageDirectories;
 use Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
-use Laravel\Vapor\Runtime\Fpm\Fpm;
-use Laravel\Vapor\Runtime\HttpHandlerFactory;
-use Laravel\Vapor\Runtime\LambdaContainer;
-use Laravel\Vapor\Runtime\LambdaRuntime;
-use Laravel\Vapor\Runtime\Secrets;
-use Laravel\Vapor\Runtime\StorageDirectories;
+
+//use Laravel\Vapor\Runtime\Fpm\Fpm;
+//use Laravel\Vapor\Runtime\HttpHandlerFactory;
+//use Laravel\Vapor\Runtime\LambdaContainer;
+//use Laravel\Vapor\Runtime\LambdaRuntime;
+//use Laravel\Vapor\Runtime\Secrets;
+//use Laravel\Vapor\Runtime\StorageDirectories;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +26,12 @@ use Laravel\Vapor\Runtime\StorageDirectories;
 |
 */
 
-fwrite(STDERR, 'Preparing to add secrets to runtime'.PHP_EOL);
+fwrite(STDERR, 'Preparing to add secrets to runtime' . PHP_EOL);
 
 $secrets = Secrets::addToEnvironment(
     $_ENV['SERVOTIZER_SSM_PATH'],
     json_decode($_ENV['SERVOTIZER_SSM_VARIABLES'] ?? '[]', true),
-    __DIR__.'/vaporSecrets.php'
+    __DIR__ . '/vaporSecrets.php'
 );
 
 /*
@@ -38,11 +45,9 @@ $secrets = Secrets::addToEnvironment(
 |
 */
 
-fwrite(STDERR, 'Preparing to boot FPM'.PHP_EOL);
+fwrite(STDERR, 'Preparing to boot FPM' . PHP_EOL);
 
-$fpm = Fpm::boot(
-    __DIR__.'/httpHandler.php', $secrets
-);
+$fpm = Fpm::boot(__DIR__ . '/httpHandler.php', $secrets);
 
 /*
 |--------------------------------------------------------------------------
@@ -55,12 +60,12 @@ $fpm = Fpm::boot(
 |
 */
 
-with(require __DIR__.'/bootstrap/app.php', function ($app) {
+with(require __DIR__ . '/bootstrap/app.php', function ($app) {
     StorageDirectories::create();
 
     $app->useStoragePath(StorageDirectories::PATH);
 
-    fwrite(STDERR, 'Caching Laravel configuration'.PHP_EOL);
+    fwrite(STDERR, 'Caching Laravel configuration' . PHP_EOL);
 
     $app->make(ConsoleKernelContract::class)->call('config:cache');
 });
@@ -83,13 +88,13 @@ $lambdaRuntime = LambdaRuntime::fromEnvironmentVariable();
 while (true) {
     $lambdaRuntime->nextInvocation(function ($invocationId, $event) {
         return HttpHandlerFactory::make($event)
-                    ->handle($event)
-                    ->toApiGatewayFormat();
+            ->handle($event)
+            ->toApiGatewayFormat();
     });
 
     $fpm->ensureRunning();
 
     LambdaContainer::terminateIfInvocationLimitHasBeenReached(
-        ++$invocations, (int) ($_ENV['SERVOTIZER_MAX_REQUESTS'] ?? 250)
+        ++$invocations, (int)($_ENV['SERVOTIZER_MAX_REQUESTS'] ?? 250)
     );
 }

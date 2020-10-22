@@ -1,10 +1,9 @@
 <?php
 
-use Laravel\Vapor\Runtime\Fpm\Fpm;
-use Laravel\Vapor\Runtime\HttpHandlerFactory;
-use Laravel\Vapor\Runtime\LambdaContainer;
-use Laravel\Vapor\Runtime\LambdaRuntime;
-use Laravel\Vapor\Runtime\Secrets;
+use Apsonex\ServotizerCore\Runtime\HttpHandlerFactory;
+use Apsonex\ServotizerCore\Runtime\LambdaContainer;
+use Apsonex\ServotizerCore\Runtime\LambdaRuntime;
+use Apsonex\ServotizerCore\Runtime\Secrets;
 
 ini_set('display_errors', '1');
 
