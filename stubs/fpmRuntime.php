@@ -31,7 +31,7 @@ fwrite(STDERR, 'Preparing to add secrets to runtime' . PHP_EOL);
 $secrets = Secrets::addToEnvironment(
     $_ENV['SERVOTIZER_SSM_PATH'],
     json_decode($_ENV['SERVOTIZER_SSM_VARIABLES'] ?? '[]', true),
-    __DIR__ . '/vaporSecrets.php'
+    __DIR__ . '/secrets.php'
 );
 
 /*

@@ -4,6 +4,7 @@ use Apsonex\ServotizerCore\Runtime\CliHandlerFactory;
 use Apsonex\ServotizerCore\Runtime\LambdaContainer;
 use Apsonex\ServotizerCore\Runtime\LambdaRuntime;
 use Apsonex\ServotizerCore\Runtime\StorageDirectories;
+use Apsonex\ServotizerCore\Runtime\Secrets;
 use Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
 
 //use Laravel\Vapor\Runtime\CliHandlerFactory;
@@ -26,7 +27,7 @@ use Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
 Secrets::addToEnvironment(
     $_ENV['SERVOTIZER_SSM_PATH'],
     json_decode($_ENV['SERVOTIZER_SSM_VARIABLES'] ?? '[]', true),
-    __DIR__ . '/vaporSecrets.php'
+    __DIR__ . '/secrets.php'
 );
 
 /*
