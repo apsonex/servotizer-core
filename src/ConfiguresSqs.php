@@ -14,7 +14,7 @@ trait ConfiguresSqs
     protected function ensureSqsIsConfigured()
     {
         // Ensure we are running on servotizer...
-        if (! isset($_ENV['VAPOR_SSM_PATH'])) {
+        if (! isset($_ENV['SERVOTIZER_SSM_PATH'])) {
             return;
         }
 

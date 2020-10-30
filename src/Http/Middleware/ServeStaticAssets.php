@@ -20,7 +20,7 @@ class ServeStaticAssets
     {
         $response = $next($request);
 
-        if (isset($_ENV['VAPOR_SSM_PATH']) && $response->getStatusCode() === 404) {
+        if (isset($_ENV['SERVOTIZER_SSM_PATH']) && $response->getStatusCode() === 404) {
             $requestUri = $request->getRequestUri();
 
             if (! in_array(ltrim($requestUri, '/'), config('servotizer.serve_assets', []))) {

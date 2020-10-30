@@ -10,9 +10,9 @@ use Throwable;
 
 class Fpm
 {
-    public const SOCKET = '/tmp/.servotizer/php-fpm.sock';
-    public const CONFIG = '/tmp/.servotizer/php-fpm.conf';
-    public const PID_FILE = '/tmp/.servotizer/php-fpm.pid';
+    public const SOCKET = '/tmp/.bref/php-fpm.sock';
+    public const CONFIG = '/tmp/.bref/php-fpm.conf';
+    public const PID_FILE = '/tmp/.bref/php-fpm.pid';
 
     /**
      * The static FPM instance for the container.

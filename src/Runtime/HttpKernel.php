@@ -46,13 +46,13 @@ class HttpKernel
         $this->app->useStoragePath(StorageDirectories::PATH);
 
         if (static::shouldSendMaintenanceModeResponse($request)) {
-            if (isset($_ENV['VAPOR_MAINTENANCE_MODE_SECRET']) &&
-                $_ENV['VAPOR_MAINTENANCE_MODE_SECRET'] == $request->path()) {
-                $response = $this->bypassResponse($_ENV['VAPOR_MAINTENANCE_MODE_SECRET']);
+            if (isset($_ENV['SERVOTIZER_MAINTENANCE_MODE_SECRET']) &&
+                $_ENV['SERVOTIZER_MAINTENANCE_MODE_SECRET'] == $request->path()) {
+                $response = $this->bypassResponse($_ENV['SERVOTIZER_MAINTENANCE_MODE_SECRET']);
 
                 $this->app->terminate();
-            } elseif (isset($_ENV['VAPOR_MAINTENANCE_MODE_SECRET']) &&
-                $this->hasValidBypassCookie($request, $_ENV['VAPOR_MAINTENANCE_MODE_SECRET'])) {
+            } elseif (isset($_ENV['SERVOTIZER_MAINTENANCE_MODE_SECRET']) &&
+                $this->hasValidBypassCookie($request, $_ENV['SERVOTIZER_MAINTENANCE_MODE_SECRET'])) {
                 $response = $this->sendRequest($request);
             } else {
                 $response = new Response(
@@ -76,8 +76,8 @@ class HttpKernel
      */
     public static function shouldSendMaintenanceModeResponse(Request $request)
     {
-        return isset($_ENV['VAPOR_MAINTENANCE_MODE']) &&
-            $_ENV['VAPOR_MAINTENANCE_MODE'] === 'true' &&
+        return isset($_ENV['SERVOTIZER_MAINTENANCE_MODE']) &&
+            $_ENV['SERVOTIZER_MAINTENANCE_MODE'] === 'true' &&
             'https://'.$request->getHttpHost() !== $_ENV['APP_VANITY_URL'];
     }
 

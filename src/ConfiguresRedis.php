@@ -13,7 +13,7 @@ trait ConfiguresRedis
      */
     protected function ensureRedisIsConfigured()
     {
-        if (! isset($_ENV['VAPOR_CACHE']) || $_ENV['VAPOR_CACHE'] !== 'true') {
+        if (! isset($_ENV['SERVOTIZER_CACHE']) || $_ENV['SERVOTIZER_CACHE'] !== 'true') {
             return;
         }
 
