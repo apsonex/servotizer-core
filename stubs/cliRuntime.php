@@ -24,11 +24,11 @@ use Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
 |
 */
 
-Secrets::addToEnvironment(
-    $_ENV['SERVOTIZER_SSM_PATH'],
-    json_decode($_ENV['SERVOTIZER_SSM_VARIABLES'] ?? '[]', true),
-    __DIR__ . '/secrets.php'
-);
+//Secrets::addToEnvironment(
+//    $_ENV['SERVOTIZER_SSM_PATH'],
+//    json_decode($_ENV['SERVOTIZER_SSM_VARIABLES'] ?? '[]', true),
+//    __DIR__ . '/secrets.php'
+//);
 
 /*
 |--------------------------------------------------------------------------

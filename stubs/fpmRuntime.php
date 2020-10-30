@@ -28,11 +28,11 @@ use Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
 
 fwrite(STDERR, 'Preparing to add secrets to runtime' . PHP_EOL);
 
-$secrets = Secrets::addToEnvironment(
-    $_ENV['SERVOTIZER_SSM_PATH'],
-    json_decode($_ENV['SERVOTIZER_SSM_VARIABLES'] ?? '[]', true),
-    __DIR__ . '/secrets.php'
-);
+//$secrets = Secrets::addToEnvironment(
+//    $_ENV['SERVOTIZER_SSM_PATH'],
+//    json_decode($_ENV['SERVOTIZER_SSM_VARIABLES'] ?? '[]', true),
+//    __DIR__ . '/secrets.php'
+//);
 
 /*
 |--------------------------------------------------------------------------
