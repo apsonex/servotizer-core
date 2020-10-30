@@ -23,7 +23,6 @@ class Secrets
         return tap(static::all($path, (array) $parameters), function ($variables) {
             foreach ($variables as $key => $value) {
                 echo "Injecting secret [{$key}] into runtime.".PHP_EOL;
-
                 $_ENV[$key] = $value;
             }
         });

@@ -34,6 +34,8 @@ fwrite(STDERR, 'Preparing to add secrets to runtime' . PHP_EOL);
 //    __DIR__ . '/secrets.php'
 //);
 
+$secrets = [];
+
 /*
 |--------------------------------------------------------------------------
 | Start PHP-FPM
