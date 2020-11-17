@@ -2,9 +2,11 @@
 
 ini_set('display_errors', '1');
 
+use Apsonex\ServotizerCore\Runtime\Secrets;
+
 error_reporting(E_ALL);
 
-if (! file_exists('/tmp/opcache')) {
+if (!file_exists('/tmp/opcache')) {
     mkdir('/tmp/opcache');
 }
 
@@ -21,8 +23,8 @@ $appRoot = $_ENV['LAMBDA_TASK_ROOT'];
 |
 */
 
-if (! file_exists('/tmp/vendor')) {
-    fwrite(STDERR, 'Downloading the application vendor archive...'.PHP_EOL);
+if (!file_exists('/tmp/vendor')) {
+    fwrite(STDERR, 'Downloading the application vendor archive...' . PHP_EOL);
 
     exec(sprintf('/opt/awscli/aws s3 cp s3://%s/%s /tmp/vendor.zip',
         $_ENV['SERVOTIZER_ARTIFACT_BUCKET_NAME'],
@@ -45,11 +47,18 @@ if (! file_exists('/tmp/vendor')) {
 |
 */
 
+if (file_exists(__DIR__ . '/secrets.php')) {
+    $parameters = require __DIR__ . '/secrets.php';
+    foreach ($parameters as $key => $value) {
+        $_ENV[$key] = $value;
+    }
+}
+
 require '/tmp/vendor/autoload.php';
 
 if (isset($_ENV['APP_RUNNING_IN_CONSOLE']) &&
     $_ENV['APP_RUNNING_IN_CONSOLE'] === 'true') {
-    return require __DIR__.'/cliRuntime.php';
+    return require __DIR__ . '/cliRuntime.php';
 } else {
-    return require __DIR__.'/fpmRuntime.php';
+    return require __DIR__ . '/fpmRuntime.php';
 }
