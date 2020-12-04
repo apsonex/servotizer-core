@@ -13,7 +13,7 @@ class HttpHandlerFactory
     /**
      * Create a new handler for the given HTTP event.
      *
-     * @param  array  $event
+     * @param array $event
      * @return \Apsonex\ServotizerCore\Contracts\LambdaEventHandler
      */
     public static function make(array $event)
@@ -24,10 +24,10 @@ class HttpHandlerFactory
             return new WarmerPingHandler;
         } elseif (isset($event['requestContext']['elb'])) {
             return new LoadBalancedFpmHandler;
-//            return new LoadBalancedAppHandler;
+            //            return new LoadBalancedAppHandler;
         } elseif (isset($event['httpMethod'])) {
             return new FpmHandler;
-        // return new AppHandler;
+            // return new AppHandler;
         } else {
             return new UnknownEventHandler;
         }
