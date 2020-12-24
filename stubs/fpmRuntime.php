@@ -89,6 +89,7 @@ $lambdaRuntime = LambdaRuntime::fromEnvironmentVariable();
 
 while (true) {
     $lambdaRuntime->nextInvocation(function ($invocationId, $event) {
+        echo json_encode($event) . PHP_EOL;
         return HttpHandlerFactory::make($event)
             ->handle($event)
             ->toApiGatewayFormat();
