@@ -1,5 +1,6 @@
 <?php
 
+use Apsonex\ServotizerCore\Runtime\CliHandlerFactory;
 use Apsonex\ServotizerCore\Runtime\Fpm\Fpm;
 use Apsonex\ServotizerCore\Runtime\HttpHandlerFactory;
 use Apsonex\ServotizerCore\Runtime\LambdaContainer;
@@ -90,9 +91,14 @@ $lambdaRuntime = LambdaRuntime::fromEnvironmentVariable();
 while (true) {
     $lambdaRuntime->nextInvocation(function ($invocationId, $event) {
         echo json_encode($event) . PHP_EOL;
-        return HttpHandlerFactory::make($event)
-            ->handle($event)
-            ->toApiGatewayFormat();
+
+        if (isset($event['cli'])) {
+            return CliHandlerFactory::make($event)->handle($event)->toApiGatewayFormat();
+        } else {
+            return HttpHandlerFactory::make($event)
+                ->handle($event)
+                ->toApiGatewayFormat();
+        }
     });
 
     $fpm->ensureRunning();
