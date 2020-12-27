@@ -42,6 +42,7 @@ class CliHandler implements LambdaEventHandler
             'context' => [
                 'command' => $command,
                 'aws_request_id' => $_ENV['AWS_REQUEST_ID'] ?? null,
+                'storage_path' => storage_path(),
             ],
         ]);
 
