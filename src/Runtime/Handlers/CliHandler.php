@@ -14,8 +14,8 @@ class CliHandler implements LambdaEventHandler
     /**
      * Handle an incoming Lambda event.
      *
-     * @param  array $event
-     * @param  \Apsonex\ServotizerCore\Contracts\LambdaResponse
+     * @param array $event
+     * @param \Apsonex\ServotizerCore\Contracts\LambdaResponse
      * @return ArrayLambdaResponse
      */
     public function handle(array $event)
@@ -25,15 +25,15 @@ class CliHandler implements LambdaEventHandler
         $process = Process::fromShellCommandline(
             $command = sprintf('php %s/artisan %s --no-interaction 2>&1',
                 $_ENV['LAMBDA_TASK_ROOT'],
-                trim($event['cli'] ?? 'servotizer:handle '.base64_encode(json_encode($event)))
+                trim($event['cli'] ?? 'servotizer:handle ' . base64_encode(json_encode($event)))
             )
         )->setTimeout(null);
 
         $process->run(function ($type, $line) use (&$output) {
-            if (! Str::containsAll($line, ['{"message":', '"level":'])) {
+            if (!Str::containsAll($line, ['{"message":', '"level":'])) {
                 $output .= $line;
             } else {
-                echo $line.PHP_EOL;
+                echo $line . PHP_EOL;
             }
         });
 
@@ -60,13 +60,13 @@ class CliHandler implements LambdaEventHandler
     /**
      * Ping the given callback URL.
      *
-     * @param  string  $callback
-     * @param  array  $response
+     * @param string $callback
+     * @param array  $response
      * @return void
      */
     protected function ping($callback, $response)
     {
-        if (! isset($callback)) {
+        if (!isset($callback)) {
             return;
         }
 
