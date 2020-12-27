@@ -10,6 +10,7 @@ if (! file_exists('/tmp/opcache')) {
 
 $appRoot = $_ENV['LAMBDA_TASK_ROOT'];
 
+// 
 require $appRoot.'/vendor/autoload.php';
 
 fwrite(STDERR, 'Loaded Composer autoload file'.PHP_EOL);
