@@ -22,7 +22,10 @@ class ServeStaticAssets
 
         //        if (isset($_ENV['SERVOTIZER_SSM_PATH']) && $response->getStatusCode() === 404) {
         if ($response->getStatusCode() === 404) {
-            $requestUri = $request->getRequestUri();
+            //            $requestUri = $request->getRequestUri();
+            $requestUri = parse_url($request->url())['path'] ?? null;
+
+            if (!$requestUri) return $response;
 
             if (!in_array(ltrim($requestUri, '/'), config('servotizer.serve_assets', []))) {
                 return $response;
