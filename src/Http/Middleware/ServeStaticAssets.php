@@ -11,19 +11,20 @@ class ServeStaticAssets
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string|null  ...$guards
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     * @param string|null              ...$guards
      * @return mixed
      */
     public function handle($request, Closure $next, ...$guards)
     {
         $response = $next($request);
 
-        if (isset($_ENV['SERVOTIZER_SSM_PATH']) && $response->getStatusCode() === 404) {
+        //        if (isset($_ENV['SERVOTIZER_SSM_PATH']) && $response->getStatusCode() === 404) {
+        if ($response->getStatusCode() === 404) {
             $requestUri = $request->getRequestUri();
 
-            if (! in_array(ltrim($requestUri, '/'), config('servotizer.serve_assets', []))) {
+            if (!in_array(ltrim($requestUri, '/'), config('servotizer.serve_assets', []))) {
                 return $response;
             }
 
