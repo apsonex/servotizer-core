@@ -20,14 +20,14 @@ class HttpKernel
     /**
      * The application instance.
      *
-     * @var \Illuminate\Foundation\Application
+     * @var Application
      */
     protected $app;
 
     /**
      * Create a new HTTP kernel instance.
      *
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param Application $app
      * @return void
      */
     public function __construct(Application $app)
@@ -38,25 +38,23 @@ class HttpKernel
     /**
      * Handle the incoming HTTP request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function handle(Request $request)
     {
         $this->app->useStoragePath(StorageDirectories::PATH);
 
         if (static::shouldSendMaintenanceModeResponse($request)) {
-            if (isset($_ENV['SERVOTIZER_MAINTENANCE_MODE_SECRET']) &&
-                $_ENV['SERVOTIZER_MAINTENANCE_MODE_SECRET'] == $request->path()) {
+            if (isset($_ENV['SERVOTIZER_MAINTENANCE_MODE_SECRET']) && $_ENV['SERVOTIZER_MAINTENANCE_MODE_SECRET'] == $request->path()) {
                 $response = $this->bypassResponse($_ENV['SERVOTIZER_MAINTENANCE_MODE_SECRET']);
-
                 $this->app->terminate();
             } elseif (isset($_ENV['SERVOTIZER_MAINTENANCE_MODE_SECRET']) &&
                 $this->hasValidBypassCookie($request, $_ENV['SERVOTIZER_MAINTENANCE_MODE_SECRET'])) {
                 $response = $this->sendRequest($request);
             } else {
                 $response = new Response(
-                    file_get_contents($_ENV['LAMBDA_TASK_ROOT'].'/503.html'), 503
+                    file_get_contents($_ENV['LAMBDA_TASK_ROOT'] . '/503.html'), 503
                 );
 
                 $this->app->terminate();
@@ -71,21 +69,21 @@ class HttpKernel
     /**
      * Determine if a maintenance mode response should be sent.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return bool
      */
     public static function shouldSendMaintenanceModeResponse(Request $request)
     {
         return isset($_ENV['SERVOTIZER_MAINTENANCE_MODE']) &&
             $_ENV['SERVOTIZER_MAINTENANCE_MODE'] === 'true' &&
-            'https://'.$request->getHttpHost() !== $_ENV['APP_VANITY_URL'];
+            'https://' . $request->getHttpHost() !== $_ENV['APP_VANITY_URL'];
     }
 
     /**
      * Determine if the incoming request has a maintenance mode bypass cookie.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $secret
+     * @param Request $request
+     * @param string  $secret
      * @return bool
      */
     protected function hasValidBypassCookie($request, $secret)
@@ -100,8 +98,8 @@ class HttpKernel
     /**
      * Redirect the user back to the root of the application with a maintenance mode bypass cookie.
      *
-     * @param  string  $secret
-     * @return \Illuminate\Http\RedirectResponse
+     * @param string $secret
+     * @return RedirectResponse
      */
     protected function bypassResponse(string $secret)
     {
@@ -117,8 +115,8 @@ class HttpKernel
     /**
      * Resolve the HTTP kernel for the request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\Http\Kernel
+     * @param Request $request
+     * @return HttpKernelContract
      */
     protected function resolveKernel(Request $request)
     {
@@ -134,8 +132,8 @@ class HttpKernel
     /**
      * Send the request to the kernel.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     protected function sendRequest(Request $request)
     {
