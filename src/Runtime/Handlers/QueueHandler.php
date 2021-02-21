@@ -25,16 +25,16 @@ class QueueHandler implements LambdaEventHandler
      */
     public function __construct()
     {
-        if (! isset(static::$app)) {
-            static::$app = require $_ENV['LAMBDA_TASK_ROOT'].'/bootstrap/app.php';
+        if (!isset(static::$app)) {
+            static::$app = require $_ENV['LAMBDA_TASK_ROOT'] . '/bootstrap/app.php';
         }
     }
 
     /**
      * Handle an incoming Lambda event.
      *
-     * @param  array  $event
-     * @param  \Apsonex\ServotizerCore\Contracts\LambdaResponse
+     * @param array $event
+     * @param \Apsonex\ServotizerCore\Contracts\LambdaResponse
      * @return ArrayLambdaResponse
      */
     public function handle(array $event)
@@ -53,7 +53,7 @@ class QueueHandler implements LambdaEventHandler
             $consoleKernel = static::$app->make(Kernel::class);
 
             $consoleInput = new StringInput(
-                'servotizer:work '.base64_encode(json_encode($event['Records'][0])).' '.$commandOptions.' --no-interaction'
+                'servotizer:work ' . rtrim(base64_encode(json_encode($event['Records'][0])), '=') . ' ' . $commandOptions . ' --no-interaction'
             );
 
             $consoleKernel->terminate($consoleInput, $status = $consoleKernel->handle(
